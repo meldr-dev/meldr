@@ -1,0 +1,17 @@
+name: Event
+version: 1.0.0
+description: Something that happened at a point in time (inspection, incident, meeting, delivery).
+primary_key: [event_id]
+embedding_template: "{{ event_type }}: {{ title }} at {{ location }} on {{ occurred_at }}"
+fields:
+  - {name: event_id, dtype: string, required: true, description: Event identifier, synonyms: [id, incident_id, record_id]}
+  - {name: title, dtype: string, required: true, description: Short description of the event,
+     synonyms: [name, subject, summary]}
+  - {name: event_type, dtype: string, description: Kind of event,
+     vocabulary: [inspection, incident, meeting, delivery, milestone, other], synonyms: [type, category, kind]}
+  - {name: occurred_at, dtype: datetime, required: true, description: When the event happened (UTC),
+     synonyms: [timestamp, date, event_date, event_time, occurred]}
+  - {name: location, dtype: string, description: Where it happened, synonyms: [site, place, venue]}
+  - {name: severity, dtype: string, description: Severity for incidents,
+     vocabulary: [low, medium, high, critical], synonyms: [priority, level]}
+  - {name: duration_minutes, dtype: float, unit: min, description: Duration in minutes, synonyms: [duration, length]}

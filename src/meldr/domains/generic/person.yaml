@@ -1,0 +1,19 @@
+name: Person
+version: 1.0.0
+description: An individual such as a contact, employee, or customer.
+primary_key: [person_id]
+embedding_template: "{{ full_name }}, {{ job_title }} at {{ organization }}"
+fields:
+  - {name: person_id, dtype: string, required: true, description: Identifier of the person in the source system,
+     synonyms: [id, contact_id, employee_id, user_id]}
+  - {name: full_name, dtype: string, required: true, pii: true, description: Full name,
+     synonyms: [name, display_name, contact_name]}
+  - {name: email, dtype: string, pii: true, description: Primary email address,
+     pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$', synonyms: [email_address, mail]}
+  - {name: phone, dtype: string, pii: true, description: Primary phone number, synonyms: [phone_number, mobile, telephone]}
+  - {name: job_title, dtype: string, description: Role or job title, synonyms: [title, role, position]}
+  - {name: organization, dtype: string, description: Organization the person belongs to,
+     synonyms: [company, employer, org_name]}
+  - {name: gender, dtype: string, pii: true, description: Self-reported gender,
+     vocabulary: [female, male, nonbinary, unknown], synonyms: [sex]}
+  - {name: birth_date, dtype: date, pii: true, description: Date of birth, synonyms: [dob, date_of_birth, birthday]}

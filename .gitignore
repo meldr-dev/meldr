@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+.venv/
+.meldr/
+**/.meldr/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+dist/
+.DS_Store
+eval/reports/
+
+# Local agent instructions, decision log, and planning docs.
+CLAUDE.md
+docs/DECISIONS.md
+docs/planning/
+
+# Local database files.
+*.sqlite
+*.sqlite3
+*.duckdb

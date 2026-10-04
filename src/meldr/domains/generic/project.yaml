@@ -1,0 +1,22 @@
+name: Project
+version: 1.0.0
+description: A construction or delivery project with a budget and schedule.
+primary_key: [project_id]
+embedding_template: "{{ name }} ({{ status }}) in {{ city }}, budget {{ budget }} USD"
+fields:
+  - {name: project_id, dtype: string, required: true, description: Project identifier or number,
+     synonyms: [id, project_number, job_number, project_no, project_code]}
+  - {name: name, dtype: string, required: true, description: Project name, synonyms: [project_name, title, job_name]}
+  - {name: status, dtype: string, description: Lifecycle status,
+     vocabulary: [planned, active, on_hold, completed, cancelled], synonyms: [project_status, stage, phase]}
+  - {name: client, dtype: string, description: Client or owner organization, synonyms: [owner, customer, client_name]}
+  - {name: contractor, dtype: string, description: General contractor or main vendor,
+     synonyms: [general_contractor, vendor, prime_contractor]}
+  - {name: city, dtype: string, description: City where the project takes place, synonyms: [location, site_city]}
+  - {name: budget, dtype: decimal, unit: USD, description: Approved budget in US dollars,
+     synonyms: [contract_value, contract_amount, total_budget, value]}
+  - {name: start_date, dtype: date, description: Planned or actual start date, synonyms: [start, begin_date, commencement]}
+  - {name: end_date, dtype: date, description: Planned or actual completion date,
+     synonyms: [completion_date, finish_date, end, due_date]}
+  - {name: area, dtype: float, unit: m2, description: Gross floor area in square meters,
+     synonyms: [floor_area, gross_area, size]}

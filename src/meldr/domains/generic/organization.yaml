@@ -1,0 +1,26 @@
+name: Organization
+version: 1.0.0
+description: A company or legal entity we do business with.
+primary_key: [org_id]
+embedding_template: "{{ legal_name }} ({{ org_type }}), {{ city }}, {{ country }}"
+fields:
+  - {name: org_id, dtype: string, required: true, description: Identifier of the organization in the source system,
+     synonyms: [id, company_id, vendor_id, account_id, customer_number, vendor_number]}
+  - {name: legal_name, dtype: string, required: true, description: Registered or primary display name,
+     synonyms: [name, company_name, vendor_name, business_name, account_name, display_name]}
+  - {name: org_type, dtype: string, description: Relationship to us,
+     vocabulary: [customer, vendor, subcontractor, partner, other],
+     synonyms: [type, vendor_type, relationship, category, kind]}
+  - {name: email, dtype: string, pii: true, description: Main contact email,
+     pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$', synonyms: [contact_email, email_address]}
+  - {name: phone, dtype: string, pii: true, description: Main phone number in E.164 if possible,
+     synonyms: [phone_number, telephone, contact_phone]}
+  - {name: city, dtype: string, description: City of the primary address, synonyms: [town, locality]}
+  - {name: country, dtype: string, description: ISO 3166-1 alpha-2 country code, pattern: '^[A-Z]{2}$',
+     synonyms: [country_code, nation]}
+  - {name: annual_revenue, dtype: decimal, unit: USD, description: Annual revenue in US dollars,
+     synonyms: [revenue, yearly_revenue, turnover, sales]}
+  - {name: founded_on, dtype: date, description: Date the organization was founded,
+     synonyms: [founded, founding_date, established, established_date, incorporation_date, est_date]}
+  - {name: is_active, dtype: boolean, description: Whether the relationship is currently active,
+     synonyms: [active, status, active_flag, enabled]}

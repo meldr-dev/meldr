@@ -1,0 +1,4 @@
+{
+  "heuristic": {"f1": 0.9984, "value_accuracy": 0.9961, "hit_at_1": 1.0, "mrr": 1.0},
+  "fake": {"f1": 1.0, "value_accuracy": 1.0, "hit_at_1": 1.0, "mrr": 1.0}
+}

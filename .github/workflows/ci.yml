@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  VALENTINE_COMMIT: d8fa9ee6d312b49ce2c45b62824df1fd31b94a72
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+        with:
+          python-version: ${{ matrix.python }}
+      - run: uv sync --extra dev --extra cli --extra sql --extra xlsx --extra docs --extra openai --extra anthropic --extra delta --extra iceberg --extra lancedb --extra qdrant --extra fsspec --extra chromadb --extra otel
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+      - run: uv run mypy src
+      - run: uv run pytest -m "not live_llm" --cov=meldr
+      - name: Eval regression gate
+        run: uv run meldr eval --variants 10 --providers heuristic,fake --check-baseline eval/baseline.json
+      - name: Real-data regression gate (Valentine / NYU table pairs)
+        run: |
+          git init -q /tmp/valentine
+          git -C /tmp/valentine fetch -q --depth 1 https://github.com/delftdata/valentine "$VALENTINE_COMMIT"
+          git -C /tmp/valentine checkout -q FETCH_HEAD
+          uv run meldr eval --suite tables --path /tmp/valentine/experiments/data \
+            --providers heuristic --check-baseline eval/baseline_tables.json
