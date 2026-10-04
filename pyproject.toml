@@ -5,13 +5,48 @@ description = "AI-assisted data harmonization: LLM-proposed, deterministically e
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
+keywords = [
+    "data-harmonization",
+    "schema-matching",
+    "schema-mapping",
+    "entity-resolution",
+    "entity-matching",
+    "data-engineering",
+    "etl",
+    "elt",
+    "llm",
+    "polars",
+    "duckdb",
+    "data-pipeline",
+    "canonical-data-model",
+    "data-lineage",
+    "data-integration",
+    "data-quality",
+    "rag",
+]
 classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Topic :: Database",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+
+[project.urls]
+Homepage = "https://github.com/meldr-dev/meldr"
+Documentation = "https://github.com/meldr-dev/meldr#readme"
+Repository = "https://github.com/meldr-dev/meldr.git"
+Issues = "https://github.com/meldr-dev/meldr/issues"
+Changelog = "https://github.com/meldr-dev/meldr/blob/main/CHANGELOG.md"
 dependencies = [
     "pydantic>=2.6",
     "polars>=1.0",

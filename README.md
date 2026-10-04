@@ -1,5 +1,9 @@
 # Meldr
 
+[![PyPI version](https://img.shields.io/pypi/v/meldr.svg?color=blue)](https://pypi.org/project/meldr/)
+[![Python versions](https://img.shields.io/pypi/pyversions/meldr.svg)](https://pypi.org/project/meldr/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Harmonize data from all connector types (SQL, REST APIs, files, documents, media) into canonical entities.
 
 An LLM (Claude, OpenAI, or a self-hosted OpenAI-compatible model) **proposes** mappings one time for each source shape. Meldr saves the approved mappings as versioned YAML and **runs them deterministically** with Polars. Meldr validates the results, quarantines the bad ones, stores the results with lineage, and indexes them for search. When you run a known source again, Meldr makes zero LLM calls.
